@@ -1,0 +1,22 @@
+{
+  "manifest_version": 1,
+  "version": "0.1",
+  "type": "APP",
+  "name": {
+    "ja": "サンプルプラグイン",
+    "en": "sample plugin"
+  },
+  "description": {
+    "ja": "devCampのサンプルプラグインです。",
+    "en": "This is sample plugin for devCamp."
+  },
+  "icon": "image/icon.png",
+  "desktop": {
+    "js": ["js/desktop.js"]
+  },
+  "config": {
+    "html": "html/config.html",
+    "js": ["js/config.js"],
+    "css": ["css/51-modern-default.css"]
+  }
+}
