@@ -3,7 +3,7 @@
 .button {
   width: 30%;
   height: 150px;
-  margin: 10px 5px 10px auto;
+  margin: 10px 3% 10px 3%;
   font-size: 450%;
   color: #fff;
   border-radius: 4px;
@@ -24,6 +24,20 @@
 }
 #finishWork:active {
   background: #0b02ab;
+}
+#restStartButton {
+  background: #77a90f;
+  border: solid 2px #79b301;
+}
+#restStartButton:active {
+  background: #79b301;
+}
+#restFinishButton {
+  background: #2a661e;
+  border: solid 2px #126102;
+}
+#restFinishButton:active {
+  background: #126102;
 }
 @media (max-width: 500px) {
   .button {
