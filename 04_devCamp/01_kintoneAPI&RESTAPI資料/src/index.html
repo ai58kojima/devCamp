@@ -1,0 +1,2166 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="apple-touch-icon"
+      href="https://static.cybozu.com/k/kintone_24.10.4_164302/image/gaia/mobile/appicon_60_60@3x.png"
+    />
+    <meta name="apple-mobile-web-app-capable" content="no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-view-version" content="v2" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0"
+    />
+    <title>勤怠管理</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://static.cybozu.com/k/kintone_24.10.4_164302/css/page/m/v2/app/index.css"
+    />
+    <!-- <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://why37oecg0cf.cybozu.com/k/api/js/download.do?app=7&amp;jsType=MOBILE_CSS&amp;contentId=112&amp;hash=85bcc9c4c2f23c529d855cdf14d5ba33cef744e3"
+    /> -->
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./createUI.js" />
+    <link rel="stylesheet" href="./dayjs.min.js" />
+    <link rel="stylesheet" href="./attendanceManagement.js" />
+
+    <style type="text/css">
+      .field-code {
+        margin-right: 1rem;
+      }
+
+      .notification {
+        background-color: whitesmoke;
+        border-radius: 4px;
+        padding: 0.5rem 1.25rem 0.5rem 0.75rem;
+        position: relative;
+      }
+
+      .notification a:not(.button):not(.dropdown-item) {
+        color: currentColor;
+        text-decoration: underline;
+      }
+
+      .notification strong {
+        color: currentColor;
+      }
+
+      .notification code,
+      .notification pre {
+        background: white;
+      }
+
+      .notification pre code {
+        background: transparent;
+      }
+
+      .notification > .delete {
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+      }
+
+      .notification .title,
+      .notification .subtitle,
+      .notification .content {
+        color: currentColor;
+      }
+
+      .notification.is-white {
+        background-color: white;
+        color: #0a0a0a;
+      }
+
+      .notification.is-black {
+        background-color: #0a0a0a;
+        color: white;
+      }
+
+      .notification.is-light {
+        background-color: whitesmoke;
+        color: #363636;
+      }
+
+      .notification.is-dark {
+        background-color: #363636;
+        color: whitesmoke;
+      }
+
+      .notification.is-primary {
+        background-color: #00d1b2;
+        color: #fff;
+      }
+
+      .notification.is-link {
+        background-color: #3273dc;
+        color: #fff;
+      }
+
+      .notification.is-info {
+        background-color: #209cee;
+        color: #fff;
+      }
+
+      .notification.is-success {
+        background-color: #23d160;
+        color: #fff;
+      }
+
+      .notification.is-warning {
+        background-color: #ffdd57;
+        color: rgba(0, 0, 0, 0.7);
+      }
+
+      .notification.is-danger {
+        background-color: #ff3860;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="main">
+        <div class="gaia-mobile-v2-pagelayout">
+          <div class="gaia-mobile-v2-pagelayout-contents">
+            <div
+              class="gaia-mobile-v2-navigationpanel gaia-mobile-v2-navigationpanel-hidden"
+            >
+              <header class="gaia-mobile-v2-navigationpanel-header">
+                <div class="gaia-mobile-v2-navigationpanel-header-left-user">
+                  <div class="gaia-mobile-v2-navigationpanel-userinformation">
+                    <a
+                      href="/k/m/people/user/ai.kojima%40fab.pasona.tech"
+                      aria-hidden="true"
+                      class="gaia-mobile-v2-navigationpanel-userinformation-usericon-container"
+                      ><span
+                        class="gaia-mobile-v2-navigationpanel-userinformation-usericon"
+                        ><img
+                          class="gaia-mobile-v2-navigationpanel-userinformation-usericon-image"
+                          src="https://static.cybozu.com/contents/k/image/icon/user/user_56.svg"
+                          alt="" /></span
+                    ></a>
+                    <div
+                      class="gaia-mobile-v2-navigationpanel-userinformation-right"
+                    >
+                      <a
+                        class="gaia-mobile-v2-navigationpanel-userinformation-username"
+                        href="/k/m/people/user/ai.kojima%40fab.pasona.tech"
+                        >児島愛</a
+                      >
+                      <div
+                        class="gaia-mobile-v2-navigationpanel-userinformation-subdomain"
+                      >
+                        <span
+                          class="gaia-mobile-v2-navigationpanel-userinformation-subdomain-label"
+                          >why37oecg0cf.cybozu.com</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <nav
+                  class="gaia-mobile-v2-navigationpanel-header-right-buttons"
+                >
+                  <div
+                    class="gaia-mobile-v2-navigationpanel-header-right-buttons-left"
+                  >
+                    <a
+                      class="gaia-mobile-v2-navigationpanel-header-others-button"
+                      href="/k/m/others"
+                      ><img
+                        src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/navigation_panel_others_icon.svg"
+                        width="24"
+                        height="24"
+                        alt="設定画面を開く"
+                    /></a>
+                  </div>
+                  <div
+                    class="gaia-mobile-v2-navigationpanel-header-right-buttons-right"
+                  >
+                    <button
+                      class="gaia-mobile-v2-navigationpanel-header-close-button"
+                      type="button"
+                    >
+                      <img
+                        src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/navigation_panel_close_icon.svg"
+                        width="28"
+                        height="28"
+                        alt="ナビゲーションメニューを閉じる"
+                      />
+                    </button>
+                  </div>
+                </nav>
+              </header>
+              <div class="gaia-mobile-v2-navigationpanel-contents">
+                <nav class="gaia-mobile-v2-navigationpanel-navigation">
+                  <ul>
+                    <li>
+                      <a
+                        class="gaia-mobile-v2-navigationpanel-navigation-top"
+                        href="/k/m/"
+                        >ポータル</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="gaia-mobile-v2-navigationpanel-navigation-assigned"
+                        href="/k/m/assigned"
+                        ><span
+                          class="gaia-mobile-v2-navigationpanel-navigation-assigned-label"
+                          ><span
+                            class="gaia-mobile-v2-navigationpanel-navigation-assigned-label-text"
+                            >未処理一覧</span
+                          ><span
+                            class="gaia-mobile-v2-navigationpanel-navigation-assigned-badge-container"
+                            ><span
+                              ><span
+                                class="gaia-mobile-v2-navigationpanel-navigation-assigned-badge-assistive-text"
+                                >未処理のレコードなし</span
+                              ></span
+                            ></span
+                          ></span
+                        ></a
+                      >
+                    </li>
+                  </ul>
+                </nav>
+                <section
+                  class="gaia-mobile-v2-navigationpanel-navigation-maincontents"
+                >
+                  <div class="gaia-mobile-v2-navigationpanel-maincontents">
+                    <div class="gaia-mobile-v2-navigationpanel-stickyheader">
+                      <a
+                        class="gaia-mobile-v2-navigationpanel-navigation-search"
+                        href="/k/m/search"
+                        ><img
+                          class="gaia-mobile-v2-navigationpanel-navigation-search-icon"
+                          src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/search_icon.svg"
+                          alt=""
+                        />検索</a
+                      >
+                      <div
+                        class="gaia-mobile-v2-navigationpanel-navigationtabs"
+                      >
+                        <div
+                          class="goog-tab-bar goog-tab-bar-horizontal goog-tab-bar-top"
+                          role="tablist"
+                          tabindex="0"
+                          style="user-select: none"
+                        >
+                          <div
+                            class="goog-tab gaia-mobile-v2-navigationpanel-tabbar-app-tab gaia-mobile-v2-navigationpanel-tabbar-app-assistive-text goog-tab-selected"
+                            role="tab"
+                            aria-selected="true"
+                            id=":9"
+                            style="user-select: none"
+                          >
+                            <span
+                              class="gaia-mobile-v2-navigationpanel-tabbar-app-label"
+                              style="user-select: none"
+                              >アプリ</span
+                            >
+                          </div>
+                          <div
+                            class="gaia-mobile-v2-navigationpanel-tabbar-app-filter-wrapper"
+                            style="user-select: none"
+                          >
+                            <button
+                              class="gaia-mobile-v2-navigationpanel-tabbar-app-filter-button"
+                              type="button"
+                              style="user-select: none"
+                            >
+                              <span
+                                class="gaia-mobile-v2-navigationpanel-tabbar-current-app-filter-name-label"
+                                style="user-select: none"
+                                >アプリ</span
+                              ><img
+                                class="gaia-mobile-v2-navigationpanel-tabbar-app-filter-select-button-icon"
+                                alt="アプリの一覧を切り替える"
+                                src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/downward-triangle-icon.svg"
+                                style="user-select: none"
+                              />
+                            </button>
+                          </div>
+                          <div
+                            class="goog-tab"
+                            role="tab"
+                            aria-selected="false"
+                            id=":a"
+                            style="user-select: none"
+                          >
+                            スペース
+                          </div>
+                          <div
+                            class="goog-tab"
+                            role="tab"
+                            aria-selected="false"
+                            id=":b"
+                            style="user-select: none"
+                          >
+                            ピープル
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="gaia-mobile-v2-navigationpanel-navigationtabcontents"
+                    >
+                      <div
+                        class="gaia-mobile-v2-ui-app-applist"
+                        style="position: relative"
+                      >
+                        <ul
+                          role="list"
+                          class="gaia-mobile-v2-ui-app-applist-list"
+                        >
+                          <li>
+                            <div class="gaia-mobile-v2-ui-app-applist-item">
+                              <button
+                                class="gaia-mobile-v2-ui-app-applist-item-favorite-button"
+                              >
+                                <img
+                                  class="gaia-mobile-v2-ui-app-applist-item-favorite-icon"
+                                  src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/not_favorite_app_icon.svg"
+                                  alt="お気に入り未登録"
+                                /></button
+                              ><a
+                                class="gaia-mobile-v2-ui-app-applist-item-link"
+                                href="/k/m/8/"
+                                ><span
+                                  class="gaia-mobile-v2-ui-app-applist-item-link-icon"
+                                  ><img
+                                    class="gaia-mobile-v2-ui-app-applist-item-link-icon-image"
+                                    src="/k/api/app/icon.do/-/app.png?app=8&amp;size=NORMAL&amp;hash=44a2d9e164d8ff0b7182a81bb8e5520ec7d20b5a&amp;.png"
+                                    alt="" /></span
+                                ><span
+                                  class="gaia-mobile-v2-ui-app-applist-item-link-text"
+                                  >アルバイト一覧</span
+                                ></a
+                              >
+                            </div>
+                          </li>
+                          <li>
+                            <div class="gaia-mobile-v2-ui-app-applist-item">
+                              <button
+                                class="gaia-mobile-v2-ui-app-applist-item-favorite-button"
+                              >
+                                <img
+                                  class="gaia-mobile-v2-ui-app-applist-item-favorite-icon"
+                                  src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/not_favorite_app_icon.svg"
+                                  alt="お気に入り未登録"
+                                /></button
+                              ><a
+                                class="gaia-mobile-v2-ui-app-applist-item-link"
+                                href="/k/m/9/"
+                                ><span
+                                  class="gaia-mobile-v2-ui-app-applist-item-link-icon"
+                                  ><img
+                                    class="gaia-mobile-v2-ui-app-applist-item-link-icon-image"
+                                    src="/k/api/app/icon.do/-/app.png?app=9&amp;size=NORMAL&amp;hash=fa9a0720d5ae89e00cc29973a21bca04c0c7d0a9&amp;.png"
+                                    alt="" /></span
+                                ><span
+                                  class="gaia-mobile-v2-ui-app-applist-item-link-text"
+                                  >作業日報</span
+                                ></a
+                              >
+                            </div>
+                          </li>
+                          <li>
+                            <div class="gaia-mobile-v2-ui-app-applist-item">
+                              <button
+                                class="gaia-mobile-v2-ui-app-applist-item-favorite-button"
+                              >
+                                <img
+                                  class="gaia-mobile-v2-ui-app-applist-item-favorite-icon"
+                                  src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/not_favorite_app_icon.svg"
+                                  alt="お気に入り未登録"
+                                /></button
+                              ><a
+                                class="gaia-mobile-v2-ui-app-applist-item-link"
+                                href="/k/m/7/"
+                                ><span
+                                  class="gaia-mobile-v2-ui-app-applist-item-link-icon"
+                                  ><img
+                                    class="gaia-mobile-v2-ui-app-applist-item-link-icon-image"
+                                    src="/k/api/app/icon.do/-/app.png?app=7&amp;size=NORMAL&amp;hash=46693f23c74d744d224562e8c5c4323a862ff98d&amp;.png"
+                                    alt="" /></span
+                                ><span
+                                  class="gaia-mobile-v2-ui-app-applist-item-link-text"
+                                  >勤怠管理</span
+                                ></a
+                              >
+                            </div>
+                          </li>
+                          <li>
+                            <div class="gaia-mobile-v2-ui-app-applist-item">
+                              <button
+                                class="gaia-mobile-v2-ui-app-applist-item-favorite-button"
+                              >
+                                <img
+                                  class="gaia-mobile-v2-ui-app-applist-item-favorite-icon"
+                                  src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/not_favorite_app_icon.svg"
+                                  alt="お気に入り未登録"
+                                /></button
+                              ><a
+                                class="gaia-mobile-v2-ui-app-applist-item-link"
+                                href="/k/m/12/"
+                                ><span
+                                  class="gaia-mobile-v2-ui-app-applist-item-link-icon"
+                                  ><img
+                                    class="gaia-mobile-v2-ui-app-applist-item-link-icon-image"
+                                    src="/k/api/app/icon.do/-/app.png?app=12&amp;size=NORMAL&amp;hash=1650fc44b742245416c50dff7eb9562a49f50e8e&amp;.png"
+                                    alt="" /></span
+                                ><span
+                                  class="gaia-mobile-v2-ui-app-applist-item-link-text"
+                                  >案件管理（営業支援パック）</span
+                                ></a
+                              >
+                            </div>
+                          </li>
+                          <li>
+                            <div class="gaia-mobile-v2-ui-app-applist-item">
+                              <button
+                                class="gaia-mobile-v2-ui-app-applist-item-favorite-button"
+                              >
+                                <img
+                                  class="gaia-mobile-v2-ui-app-applist-item-favorite-icon"
+                                  src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/not_favorite_app_icon.svg"
+                                  alt="お気に入り未登録"
+                                /></button
+                              ><a
+                                class="gaia-mobile-v2-ui-app-applist-item-link"
+                                href="/k/m/10/"
+                                ><span
+                                  class="gaia-mobile-v2-ui-app-applist-item-link-icon"
+                                  ><img
+                                    class="gaia-mobile-v2-ui-app-applist-item-link-icon-image"
+                                    src="/k/api/app/icon.do/-/app.png?app=10&amp;size=NORMAL&amp;hash=7e9f72702101a72237f0f822e282feec33416f53&amp;.png"
+                                    alt="" /></span
+                                ><span
+                                  class="gaia-mobile-v2-ui-app-applist-item-link-text"
+                                  >活動履歴（営業支援パック）</span
+                                ></a
+                              >
+                            </div>
+                          </li>
+                          <li>
+                            <div class="gaia-mobile-v2-ui-app-applist-item">
+                              <button
+                                class="gaia-mobile-v2-ui-app-applist-item-favorite-button"
+                              >
+                                <img
+                                  class="gaia-mobile-v2-ui-app-applist-item-favorite-icon"
+                                  src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/not_favorite_app_icon.svg"
+                                  alt="お気に入り未登録"
+                                /></button
+                              ><a
+                                class="gaia-mobile-v2-ui-app-applist-item-link"
+                                href="/k/m/11/"
+                                ><span
+                                  class="gaia-mobile-v2-ui-app-applist-item-link-icon"
+                                  ><img
+                                    class="gaia-mobile-v2-ui-app-applist-item-link-icon-image"
+                                    src="/k/api/app/icon.do/-/app.png?app=11&amp;size=NORMAL&amp;hash=956186992d0b7715869368bc13d8f9fed3a8e842&amp;.png"
+                                    alt="" /></span
+                                ><span
+                                  class="gaia-mobile-v2-ui-app-applist-item-link-text"
+                                  >顧客管理（営業支援パック）</span
+                                ></a
+                              >
+                            </div>
+                          </li>
+                          <li
+                            class="gaia-mobile-v2-ui-app-applist-readmorecell"
+                          >
+                            <div
+                              class="gaia-mobile-v2-ui-readmorebutton"
+                              style="display: none"
+                            >
+                              <button
+                                type="button"
+                                class="gaia-mobile-v2-ui-readmorebutton-button"
+                              >
+                                さらに表示
+                              </button>
+                              <div
+                                class="gaia-mobile-v2-ui-readmorebutton-loading"
+                                style="display: none"
+                              >
+                                <span></span><span></span><span></span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                        <div
+                          class="gaia-mobile-v2-ui-app-applist-loading"
+                          style="display: none"
+                        >
+                          <span></span><span></span><span></span>
+                        </div>
+                        <div
+                          class="gaia-mobile-v2-ui-app-applist-empty-message gaia-mobile-v2-ui-app-applist-empty-message-not-displayed"
+                        ></div>
+                      </div>
+                      <div
+                        class="gaia-mobile-v2-ui-space-spacelist"
+                        style="position: relative; display: none"
+                      >
+                        <ul
+                          role="list"
+                          class="gaia-mobile-v2-ui-space-spacelist-list"
+                        >
+                          <li>
+                            <div class="gaia-mobile-v2-ui-space-spacelist-item">
+                              <button
+                                type="button"
+                                class="gaia-mobile-v2-ui-space-spacelist-item-favorite-button"
+                              >
+                                <img
+                                  class="gaia-mobile-v2-ui-space-spacelist-item-favorite-add-button-img"
+                                  src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/not_favorite_app_icon.svg"
+                                  alt="お気に入り未登録"
+                                /><img
+                                  class="gaia-mobile-v2-ui-space-spacelist-item-favorite-delete-button-img gaia-mobile-v2-ui-space-spacelist-item-favorite-button-img-hidden"
+                                  src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/favorite_app_icon.svg"
+                                  alt="お気に入り済み"
+                                /></button
+                              ><a
+                                class="gaia-mobile-v2-ui-space-spacelist-item-link"
+                                href="/k/m/space/2"
+                                ><span
+                                  class="gaia-mobile-v2-ui-space-spacelist-item-link-icon"
+                                  ><img
+                                    class="gaia-mobile-v2-ui-space-spacelist-item-link-icon-image"
+                                    src="https://static.cybozu.com/contents/k/image/ocean/cover/m/idea.jpg"
+                                    alt="" /></span
+                                ><span
+                                  class="gaia-mobile-v2-ui-space-spacelist-item-link-text"
+                                  >kintone JS API / REST API</span
+                                ><span
+                                  class="gaia-mobile-v2-ui-space-spacelist-item-tag-joined"
+                                  >参加中</span
+                                ></a
+                              >
+                            </div>
+                          </li>
+                          <li
+                            class="gaia-mobile-v2-ui-space-spacelist-readmorecell"
+                          >
+                            <div
+                              class="gaia-mobile-v2-ui-readmorebutton"
+                              style="display: none"
+                            >
+                              <button
+                                type="button"
+                                class="gaia-mobile-v2-ui-readmorebutton-button"
+                              >
+                                さらに表示
+                              </button>
+                              <div
+                                class="gaia-mobile-v2-ui-readmorebutton-loading"
+                                style="display: none"
+                              >
+                                <span></span><span></span><span></span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <div
+                        class="gaia-mobile-v2-navigationpanel-peoplelist"
+                        style="position: relative; display: none"
+                      >
+                        <ul
+                          role="list"
+                          class="gaia-mobile-v2-navigationpanel-peoplelist-list"
+                        >
+                          <li>
+                            <div
+                              class="gaia-mobile-v2-navigationpanel-peoplelist-item"
+                            >
+                              <a
+                                class="gaia-mobile-v2-navigationpanel-peoplelist-item-link"
+                                href="/k/m/people/user/ai.kojima%40fab.pasona.tech"
+                                ><span
+                                  class="gaia-mobile-v2-navigationpanel-peoplelist-item-link-icon"
+                                  ><img
+                                    class="gaia-mobile-v2-navigationpanel-peoplelist-item-link-icon-image"
+                                    src="https://static.cybozu.com/contents/k/image/icon/user/user_56.svg"
+                                    alt="" /></span
+                                ><span
+                                  class="gaia-mobile-v2-navigationpanel-peoplelist-item-link-text"
+                                  >児島愛</span
+                                ></a
+                              >
+                            </div>
+                          </li>
+                          <li
+                            class="gaia-mobile-v2-navigationpanel-readmorecell"
+                          >
+                            <div
+                              class="gaia-mobile-v2-ui-readmorebutton"
+                              style="display: none"
+                            >
+                              <button
+                                type="button"
+                                class="gaia-mobile-v2-ui-readmorebutton-button"
+                              >
+                                さらに表示
+                              </button>
+                              <div
+                                class="gaia-mobile-v2-ui-readmorebutton-loading"
+                                style="display: none"
+                              >
+                                <span></span><span></span><span></span>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+            <div class="gaia-mobile-v2-viewpanel-viewpanelcontainer">
+              <div
+                class="gaia-mobile-v2-viewpanel gaia-mobile-v2-app-indexviewpanel gaia-mobile-v2-indexviewpanel-table-view"
+              >
+                <header class="gaia-mobile-v2-viewpanel-header">
+                  <div class="gaia-mobile-v2-viewpanel-globalnavigationbar">
+                    <nav
+                      class="gaia-mobile-v2-viewpanel-globalnavigationbar-left-actions"
+                    >
+                      <button
+                        class="gaia-mobile-v2-viewpanel-globalnavigationbar-navigationpanel-button"
+                        type="button"
+                      >
+                        <img
+                          src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/navigation_panel_open_icon.svg"
+                          width="28"
+                          height="28"
+                          alt="ナビゲーションメニューを開く"
+                        />
+                      </button>
+                    </nav>
+                    <div
+                      class="gaia-mobile-v2-viewpanel-globalnavigationbar-title"
+                    >
+                      <h1
+                        class="gaia-mobile-v2-viewpanel-globalnavigationbar-title-app-button-header"
+                      >
+                        <button
+                          class="gaia-mobile-v2-viewpanel-globalnavigationbar-title-app-button"
+                        >
+                          <div
+                            class="gaia-mobile-v2-viewpanel-globalnavigationbar-image-and-text"
+                          >
+                            <div
+                              class="gaia-mobile-v2-viewpanel-globalnavigationbar-title-image"
+                            >
+                              <img
+                                class="gaia-mobile-v2-viewpanel-globalnavigationbar-title-app-icon"
+                                src="/k/api/app/icon.do/-/app.png?app=7&amp;size=NORMAL&amp;hash=46693f23c74d744d224562e8c5c4323a862ff98d&amp;.png"
+                                alt=""
+                              /><img
+                                class="gaia-mobile-v2-viewpanel-globalnavigationbar-title-favorite-icon"
+                                src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/title_favorite_app_icon.svg"
+                                alt="お気に入りに追加したアプリ"
+                                style="display: none"
+                              />
+                            </div>
+                            <span
+                              class="gaia-mobile-v2-viewpanel-globalnavigationbar-title-text"
+                              >勤怠管理</span
+                            >
+                          </div>
+                          <img
+                            src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/downward-triangle-icon.svg"
+                            alt="このアプリの操作メニューを開く"
+                          />
+                        </button>
+                      </h1>
+                    </div>
+                    <nav
+                      class="gaia-mobile-v2-viewpanel-globalnavigationbar-right-actions"
+                    >
+                      <div
+                        class="gaia-mobile-v2-viewpanel-globalnavigationbar-right-secondary-action"
+                      >
+                        <a
+                          class="gaia-mobile-v2-app-searchrecordlink"
+                          href="/k/m/search?app=7"
+                          ><img
+                            src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/search_icon.svg"
+                            width="28"
+                            height="28"
+                            alt="レコードを検索する"
+                        /></a>
+                      </div>
+                      <button
+                        class="gaia-mobile-v2-viewpanel-globalnavigationbar-notificationpanel-button"
+                        type="button"
+                      >
+                        <img
+                          src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/notification_panel_open_icon.svg"
+                          width="28"
+                          height="28"
+                          alt="通知一覧を開く"
+                        />
+                        <div
+                          class="gaia-mobile-v2-viewpanel-notificationbadge gaia-mobile-v2-viewpanel-notificationbadge-empty"
+                        >
+                          <div
+                            class="gaia-mobile-v2-viewpanel-notificationbadge-badge"
+                          >
+                            <span
+                              class="gaia-mobile-v2-viewpanel-notificationbadge-badge-assistive-text"
+                              >未読通知はありません</span
+                            >
+                          </div>
+                        </div>
+                      </button>
+                    </nav>
+                  </div>
+                </header>
+                <main
+                  class="gaia-mobile-v2-viewpanel-contents"
+                  aria-hidden="false"
+                  style="position: relative"
+                >
+                  <div class="gaia-mobile-viewcontroller">
+                    <div class="gaia-mobile-v2-indexviewpanel-contents-inner">
+                      <div
+                        class="gaia-mobile-v2-indexviewpanel-contents-header"
+                      >
+                        <div
+                          class="gaia-mobile-v2-indexviewpanel-contents-navigationbar"
+                        >
+                          <div class="gaia-mobile-v2-app-index-navigationbar">
+                            <div
+                              class="goog-tab-bar goog-tab-bar-horizontal goog-tab-bar-top"
+                              role="tablist"
+                              tabindex="0"
+                              style="user-select: none"
+                            >
+                              <div
+                                class="goog-tab goog-tab-selected"
+                                role="tab"
+                                aria-selected="true"
+                                id=":r"
+                                style="user-select: none"
+                              >
+                                一覧
+                              </div>
+                            </div>
+                            <div
+                              class="gaia-mobile-v2-app-index-navigationbar-bodyselector gaia-mobile-v2-app-index-navigationbar-bodyselector-show-filter"
+                            >
+                              <div
+                                class="gaia-mobile-v2-app-index-navigationbar-bodyselector-left"
+                              >
+                                <button
+                                  class="gaia-mobile-v2-app-index-navigationbar-bodyselector-viewselectbutton"
+                                >
+                                  <span class="">今日の出退勤一覧</span
+                                  ><img
+                                    src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/downward-triangle-icon-black.svg"
+                                    alt="一覧を切り替える"
+                                  />
+                                </button>
+                              </div>
+                              <div
+                                class="gaia-mobile-v2-app-index-navigationbar-bodyselector-right"
+                              >
+                                <button
+                                  class="gaia-mobile-v2-app-index-navigationbar-bodyselector-filterbutton"
+                                  type="button"
+                                >
+                                  <img
+                                    src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/app_index_filter.svg"
+                                    alt="絞り込む"
+                                  />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="kintone-mobile-app-header-space">
+                        <div class="div" id="attendanceUIArea">
+                          <select id="staffNumber">
+                            <option disabled="">
+                              社員番号を選択してください
+                            </option>
+                            <option value="0001">【0001】 児島愛</option>
+                            <option value="0002">【0002】 山田花子</option>
+                            <option value="0003">
+                              【0003】 田中太郎
+                            </option></select
+                          ><button id="startWork" class="button">出勤</button
+                          ><button id="finishWork" class="button">退勤</button>
+                        </div>
+                      </div>
+                      <div class="gaia-mobile-v2-indexviewpanel-contents-body">
+                        <div>
+                          <div class="gaia-mobile-v2-indexviewpanel-tableview">
+                            <div>
+                              <div
+                                class="gaia-mobile-v2-app-index-recordlist-table-wrapper gaia-mobile-v2-app-index-recordlist-table-wrapper-adjustable"
+                                style="width: 990px"
+                              >
+                                <table
+                                  class="gaia-mobile-v2-app-index-recordlist-table"
+                                  style="width: 940px"
+                                >
+                                  <colgroup
+                                    class="gaia-mobile-v2-app-index-recordlist-table-colgroup"
+                                  >
+                                    <col
+                                      class="gaia-mobile-v2-app-index-recordlist-table-colgroup-col"
+                                    />
+                                    <col
+                                      class="gaia-mobile-v2-app-index-recordlist-table-colgroup-col"
+                                      style="width: 150px"
+                                    />
+                                    <col
+                                      class="gaia-mobile-v2-app-index-recordlist-table-colgroup-col"
+                                      style="width: 150px"
+                                    />
+                                    <col
+                                      class="gaia-mobile-v2-app-index-recordlist-table-colgroup-col"
+                                      style="width: 150px"
+                                    />
+                                    <col
+                                      class="gaia-mobile-v2-app-index-recordlist-table-colgroup-col"
+                                      style="width: 150px"
+                                    />
+                                    <col
+                                      class="gaia-mobile-v2-app-index-recordlist-table-colgroup-col"
+                                      style="width: 150px"
+                                    />
+                                    <col
+                                      class="gaia-mobile-v2-app-index-recordlist-table-colgroup-col"
+                                      style="width: 150px"
+                                    />
+                                  </colgroup>
+                                  <thead
+                                    class="gaia-mobile-v2-app-index-recordlist-table-header"
+                                    style="left: 1228.8px"
+                                  >
+                                    <tr
+                                      class="gaia-mobile-v2-app-index-recordlist-table-header-row"
+                                    >
+                                      <th
+                                        class="gaia-mobile-v2-app-index-recordlist-table-headercell gaia-mobile-v2-app-index-recordlist-table-bodyrow-cell-first"
+                                      ></th>
+                                      <th
+                                        class="gaia-mobile-v2-app-index-recordlist-table-headercell label-11109123"
+                                        style="width: 150px"
+                                      >
+                                        <div
+                                          class="gaia-mobile-v2-app-index-recordlist-table-headercell-wrapper"
+                                          style="width: 150px"
+                                        >
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-resizer-left"
+                                          ></div>
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-label"
+                                          >
+                                            社員番号
+                                          </div>
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-resizer-right"
+                                          ></div>
+                                        </div>
+                                      </th>
+                                      <th
+                                        class="gaia-mobile-v2-app-index-recordlist-table-headercell label-6126831"
+                                        style="width: 150px"
+                                      >
+                                        <div
+                                          class="gaia-mobile-v2-app-index-recordlist-table-headercell-wrapper"
+                                          style="width: 150px"
+                                        >
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-resizer-left"
+                                          ></div>
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-label"
+                                          >
+                                            氏名
+                                          </div>
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-resizer-right"
+                                          ></div>
+                                        </div>
+                                      </th>
+                                      <th
+                                        class="gaia-mobile-v2-app-index-recordlist-table-headercell label-6126832"
+                                        style="width: 150px"
+                                      >
+                                        <div
+                                          class="gaia-mobile-v2-app-index-recordlist-table-headercell-wrapper"
+                                          style="width: 150px"
+                                        >
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-resizer-left"
+                                          ></div>
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-label"
+                                          >
+                                            出勤時刻
+                                          </div>
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-resizer-right"
+                                          ></div>
+                                        </div>
+                                      </th>
+                                      <th
+                                        class="gaia-mobile-v2-app-index-recordlist-table-headercell label-6126833"
+                                        style="width: 150px"
+                                      >
+                                        <div
+                                          class="gaia-mobile-v2-app-index-recordlist-table-headercell-wrapper"
+                                          style="width: 150px"
+                                        >
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-resizer-left"
+                                          ></div>
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-label"
+                                          >
+                                            退勤時刻
+                                          </div>
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-resizer-right"
+                                          ></div>
+                                        </div>
+                                      </th>
+                                      <th
+                                        class="gaia-mobile-v2-app-index-recordlist-table-headercell label-6126836"
+                                        style="width: 150px"
+                                      >
+                                        <div
+                                          class="gaia-mobile-v2-app-index-recordlist-table-headercell-wrapper"
+                                          style="width: 150px"
+                                        >
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-resizer-left"
+                                          ></div>
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-label"
+                                          >
+                                            休憩時間
+                                          </div>
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-resizer-right"
+                                          ></div>
+                                        </div>
+                                      </th>
+                                      <th
+                                        class="gaia-mobile-v2-app-index-recordlist-table-headercell label-6126834"
+                                        style="width: 150px"
+                                      >
+                                        <div
+                                          class="gaia-mobile-v2-app-index-recordlist-table-headercell-wrapper"
+                                          style="width: 150px"
+                                        >
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-resizer-left"
+                                          ></div>
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-label"
+                                          >
+                                            勤務時間
+                                          </div>
+                                          <div
+                                            class="gaia-mobile-v2-app-index-recordlist-table-headercell-resizer-right"
+                                          ></div>
+                                        </div>
+                                      </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody
+                                    class="gaia-mobile-v2-app-index-recordlist-table-body"
+                                  >
+                                    <tr
+                                      class="gaia-mobile-v2-app-index-recordlist-table-bodyrow"
+                                      tabindex="0"
+                                    >
+                                      <td
+                                        class="gaia-mobile-v2-app-index-recordlist-table-cell gaia-mobile-v2-app-index-recordlist-table-bodyrow-cell-first"
+                                      >
+                                        <a
+                                          class="gaia-mobile-v2-app-index-recordlist-table-cell-first-recorddetail-link"
+                                          href="/k/m/7/show?record=1&amp;prev=0&amp;next=0&amp;view=11109115&amp;q=f6126832%20%3D%20TODAY%28%29&amp;sort_0=f6126822&amp;order_0=DESC"
+                                          title="レコードの詳細(コメントなし)"
+                                          ><img
+                                            src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/record_detail_icon.svg"
+                                            alt=""
+                                        /></a>
+                                      </td>
+                                      <td
+                                        class="gaia-mobile-v2-app-index-recordlist-table-cell value-11109123"
+                                      >
+                                        <div
+                                          class="gaia-mobile-v2-app-index-recordlist-table-linktextcellvalue"
+                                        >
+                                          <a
+                                            href="/k/m/8/show?record=1"
+                                            target="_blank"
+                                            >0001</a
+                                          >
+                                        </div>
+                                      </td>
+                                      <td
+                                        class="gaia-mobile-v2-app-index-recordlist-table-cell value-6126831"
+                                      >
+                                        <div
+                                          class="gaia-mobile-v2-app-index-recordlist-table-htmlcellvalue"
+                                        >
+                                          児島愛
+                                        </div>
+                                      </td>
+                                      <td
+                                        class="gaia-mobile-v2-app-index-recordlist-table-cell value-6126832"
+                                      >
+                                        <div
+                                          class="gaia-mobile-v2-app-index-recordlist-table-textcellvalue"
+                                        >
+                                          2024-10-16 9:00
+                                        </div>
+                                      </td>
+                                      <td
+                                        class="gaia-mobile-v2-app-index-recordlist-table-cell value-6126833"
+                                      >
+                                        <div
+                                          class="gaia-mobile-v2-app-index-recordlist-table-textcellvalue"
+                                        >
+                                          2024-10-16 17:00
+                                        </div>
+                                      </td>
+                                      <td
+                                        class="gaia-mobile-v2-app-index-recordlist-table-cell value-6126836"
+                                      >
+                                        <div
+                                          class="gaia-mobile-v2-app-index-recordlist-table-rightalignedtextcellvalue"
+                                        >
+                                          1時間0分
+                                        </div>
+                                      </td>
+                                      <td
+                                        class="gaia-mobile-v2-app-index-recordlist-table-cell value-6126834"
+                                      >
+                                        <div
+                                          class="gaia-mobile-v2-app-index-recordlist-table-rightalignedtextcellvalue"
+                                        >
+                                          7時間0分
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <div
+                                  class="gaia-mobile-v2-app-index-recordlist-table-empty-message-wrapper"
+                                ></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="gaia-mobile-v2-indexviewpanel-tableview-pager"
+                          >
+                            <div class="gaia-mobile-v2-app-index-pager">
+                              <div class="gaia-mobile-v2-app-index-pager-prev">
+                                <span
+                                  class="gaia-mobile-v2-app-index-pager-prev-disabled"
+                                  ><img
+                                    src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/app_index_pager_arrow_left_disabled.svg"
+                                    alt="最初のページです"
+                                    role="img"
+                                /></span>
+                              </div>
+                              <span
+                                class="gaia-mobile-v2-app-index-pager-current"
+                                >1 - 1</span
+                              >
+                              <div class="gaia-mobile-v2-app-index-pager-next">
+                                <span
+                                  class="gaia-mobile-v2-app-index-pager-next-disabled"
+                                  ><img
+                                    src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/app_index_pager_arrow_right_disabled.svg"
+                                    alt="最後のページです"
+                                    role="img"
+                                /></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </main>
+                <footer
+                  class="gaia-mobile-v2-viewpanel-footer"
+                  aria-hidden="false"
+                >
+                  <div class="gaia-mobile-v2-app-indextoolbar">
+                    <div class="gaia-mobile-v2-app-indextoolbar-right">
+                      <button class="gaia-mobile-v2-app-indextoolbar-addrecord">
+                        <span
+                          class="gaia-mobile-v2-app-indextoolbar-addrecord-border"
+                          >追加</span
+                        >
+                      </button>
+                    </div>
+                  </div>
+                </footer>
+              </div>
+            </div>
+            <div
+              class="gaia-mobile-v2-notificationpanel gaia-mobile-v2-notificationpanel-hidden"
+            >
+              <header class="gaia-mobile-v2-notificationpanel-header">
+                <nav
+                  class="gaia-mobile-v2-notificationpanel-header-left-buttons"
+                >
+                  <button
+                    class="gaia-mobile-v2-notificationpanel-header-close-button"
+                    type="button"
+                  >
+                    <img
+                      src="https://static.cybozu.com/contents/k/image/gaia/mobile/v2/notification_panel_close_icon.svg"
+                      width="28"
+                      height="28"
+                      alt="通知一覧を閉じる/"
+                    />
+                  </button>
+                </nav>
+                <h1 class="gaia-mobile-v2-notificationpanel-header-title">
+                  通知
+                </h1>
+                <div
+                  class="gaia-mobile-v2-notificationpanel-header-right-buttons"
+                >
+                  <div class="gaia-mobile-v2-notification-readtoggle">
+                    <ul>
+                      <li
+                        class="gaia-mobile-v2-notification-readtoggle-unread-item selected"
+                      >
+                        <button
+                          class="gaia-mobile-v2-notification-readtoggle-unread-button"
+                          type="button"
+                          aria-pressed="true"
+                        >
+                          <span>未読</span>
+                        </button>
+                      </li>
+                      <li
+                        class="gaia-mobile-v2-notification-readtoggle-read-item"
+                      >
+                        <button
+                          class="gaia-mobile-v2-notification-readtoggle-read-button"
+                          type="button"
+                          aria-pressed="false"
+                        >
+                          <span>既読</span>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </header>
+              <div class="gaia-mobile-v2-notificationpanel-contents">
+                <div class="gaia-mobile-v2-notification-notification">
+                  <div
+                    class="gaia-mobile-v2-notification-tabbar"
+                    role="tablist"
+                    tabindex="0"
+                    style="user-select: none"
+                  >
+                    <div
+                      class="goog-tab goog-tab-selected"
+                      role="tab"
+                      aria-selected="true"
+                      id=":v"
+                      style="user-select: none"
+                    >
+                      自分宛
+                    </div>
+                    <div
+                      class="goog-tab"
+                      role="tab"
+                      aria-selected="false"
+                      id=":w"
+                      style="user-select: none"
+                    >
+                      あとで読む
+                    </div>
+                    <div
+                      class="goog-tab gaia-mobile-v2-notification-tabbar-all-or-user-filter-tab"
+                      role="tab"
+                      aria-selected="false"
+                      id=":x"
+                      style="user-select: none"
+                    >
+                      <span
+                        class="gaia-mobile-v2-notification-tabbar-all-or-user-filter-wrapper"
+                        style="user-select: none"
+                        ><span
+                          class="gaia-mobile-v2-notification-tabbar-all-or-user-filter-label"
+                          style="user-select: none"
+                          >すべて</span
+                        ></span
+                      >
+                    </div>
+                  </div>
+                  <div class="toppage-ntflist-view">
+                    <div class="view-container">
+                      <div
+                        class="gaia-mobile-v2-notification-pulltorefresh-container"
+                      >
+                        <div
+                          class="gaia-mobile-v2-notification-pulltorefresh"
+                          aria-hidden="true"
+                        >
+                          <div
+                            class="gaia-mobile-v2-notification-pulltorefresh-icon"
+                          ></div>
+                          <div
+                            class="gaia-mobile-v2-notification-pulltorefresh-text"
+                          ></div>
+                        </div>
+                      </div>
+                      <ul class="listview">
+                        <li class="toppage-ntflist-emptycell" style="">
+                          <div class="empty-label">
+                            自分宛の未読通知はありません。
+                          </div>
+                        </li>
+                        <li
+                          class="gaia-mobile-v2-notification-readmorecell"
+                          style="display: none"
+                        >
+                          <div class="cell-label" style="">さらに表示</div>
+                          <div class="cell-loading-gaia" style="display: none">
+                            <span></span><span></span><span></span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://static.cybozu.com/k/kintone_24.10.4_164302/js/resources/message-JP_ja.js"></script>
+    <script src="https://static.cybozu.com/k/kintone_24.10.4_164302/js/compiled/m/app/index.js"></script>
+    <script>
+      cybozu.data.uri['STATIC_URL'] =
+        'https:\/\/static.cybozu.com\/k\/kintone_24.10.4_164302';
+      cybozu.data.uri['STATIC_ROOT'] = 'https:\/\/static.cybozu.com\/';
+      cybozu.data.uri['BASE_PATH'] = '\/k\/';
+      cybozu.data.uri['SLASH_PATH'] = '/';
+      cybozu.data.uri['PAGE_PREFIX'] = '';
+      cybozu.data.uri['API_PREFIX'] = '\/api';
+      cybozu.data.uri['API_PREFIX_RELEASE'] = '\/api';
+      cybozu.data.uri['API_PREFIX_DEV'] = '\/api\/dev';
+      cybozu.data.uri['MARKET_PREFIX'] =
+        'https:\/\/static.cybozu.com\/k\/neco\/market\/41';
+      cybozu.data.uri['EMOJI_PREFIX'] =
+        'https:\/\/static.cybozu.com\/contents\/k\/emoji';
+      cybozu.data.uri['STATIC_IMAGE_PREFIX'] =
+        'https:\/\/static.cybozu.com\/contents\/k\/image';
+      cybozu.data.uri['GUEST_PREFIX'] = '\/guest';
+      cybozu.data.uri['CURRENT_CONTEXT'] = '';
+      cybozu.data.uri['STORE_ORDER_URL'] =
+        'https:\/\/store.cybozu.com\/transfer\/order?aud=c707055&code=kintone';
+      cybozu.data.uri['CLARA_BASE_URL'] = 'https:\/\/get.kintone.com';
+      cybozu.data.uri['CLARA_SSO_V2_URL'] =
+        'https:\/\/get.kintone.com\/v2\/sso\/login?subdomain=why37oecg0cf';
+      cybozu.data.uri.init();
+    </script>
+    <script>
+      // common
+      cybozu.data['REQUEST_TOKEN'] = '402711cf-acd0-4fe0-a971-2817a835fc8a';
+      cybozu.data['LOGIN_USER'] = {
+        birthDate: null,
+        callto: null,
+        code: 'ai.kojima@fab.pasona.tech',
+        ctime: '2024-10-15T02:32:56.000Z',
+        dateTimeLocale: null,
+        description: null,
+        email: 'ai.kojima@fab.pasona.tech',
+        employeeNumber: null,
+        employeeType: null,
+        entityType: 'USER',
+        extendedData: null,
+        extensionNumber: null,
+        formattedDescription: null,
+        givenName: null,
+        givenNameReading: null,
+        id: '1',
+        initials: null,
+        isBuiltIn: false,
+        joinDate: null,
+        langLocale: null,
+        localName: null,
+        localNameLocale: null,
+        locale: null,
+        middleName: null,
+        mobilePhone: null,
+        mtime: '2024-10-15T02:32:56.000Z',
+        name: '児島愛',
+        numberLocale: null,
+        office: null,
+        phone: null,
+        photo: {
+          small:
+            'https://static.cybozu.com/contents/k/image/icon/user/user_16.svg',
+          size_56:
+            'https://static.cybozu.com/contents/k/image/icon/user/user_56.svg',
+          normal:
+            'https://static.cybozu.com/contents/k/image/icon/user/user_36.svg',
+          size_32:
+            'https://static.cybozu.com/contents/k/image/icon/user/user_32.svg',
+          original:
+            'https://static.cybozu.com/contents/k/image/icon/user/user.svg',
+          original_r:
+            'https://static.cybozu.com/contents/k/image/icon/user/user.svg',
+          size_40:
+            'https://static.cybozu.com/contents/k/image/icon/user/user_40.svg',
+          size_48_r:
+            'https://static.cybozu.com/contents/k/image/icon/user/user_48.svg',
+          size_48:
+            'https://static.cybozu.com/contents/k/image/icon/user/user_48.svg',
+          size_96_r:
+            'https://static.cybozu.com/contents/k/image/icon/user/user_96.svg',
+          size_24:
+            'https://static.cybozu.com/contents/k/image/icon/user/user_24.svg',
+        },
+        photoMd5: null,
+        photoMime: null,
+        primaryOrganization: null,
+        removed: false,
+        serviceFlags: null,
+        sortOrder: null,
+        surName: null,
+        surNameReading: null,
+        timezone: 'Asia/Tokyo',
+        url: null,
+        valid: true,
+      };
+      cybozu.data['isDevelop'] = false;
+      cybozu.data['DISPLAY_LOCALE'] = 'ja';
+      cybozu.data['PERSONALSETTINGS_DATA'] = {
+        hasAccessedKintone: true,
+        mailNotificationCondition: 'MENTION',
+        mailNotificationMailFormat: 'HTML',
+        mailNotificationWillSend: true,
+        readAddRecordHint: false,
+        readCreateAppMessage: false,
+        readEditRecordHint: false,
+        readInviteGuestMessage: false,
+        readShowRecordDetailHint: false,
+        recordListSize: 20,
+        showSpaceCreatedMessage: null,
+        shownWelcomeDialog: null,
+        timeNotation: 'TWENTY_FOUR',
+      };
+      cybozu.data['PERSONALSETTINGS_DATA']['locale'] = 'ja';
+      cybozu.data['PERSONALSETTINGS_DATA']['language'] = 'ja';
+      cybozu.data['PERSONALSETTINGS_DATA']['timezone'] = 'Asia\/Tokyo';
+      cybozu.data['TIMEZONE_DATA'] = {
+        id: 'Asia/Tokyo',
+        names: [],
+        std_offset: 540,
+        transitions: [],
+      };
+      cybozu.data['SYSTEM_TIMEZONE_DATA'] = {
+        id: 'Asia/Tokyo',
+        names: [],
+        std_offset: 540,
+        transitions: [],
+      };
+      cybozu.data['SYSTEM_SETTINGS'] = {
+        guestAvailable: true,
+        peopleAvailable: true,
+        pollingInterval: 300,
+        spaceAvailable: true,
+      };
+      cybozu.data['REGION'] = 'JP';
+      cybozu.data['DOMAIN_MAP'] = { JP: 'cybozu.com', CN: 'cybozu.cn' };
+      cybozu.data['ACCESS_FROM'] = 'jp';
+      cybozu.data['HAS_OTHER_DOMAIN_SPACE'] = false;
+      cybozu.data['IS_COMMONALIZED_GUEST_USER'] = false;
+      cybozu.data['HOME_DOMAIN_FQDN'] = '';
+      cybozu.data['IS_MOBILE_DEVICE'] = false;
+      cybozu.data['MOBILE_VIEW_TYPE'] = 'MOBILE';
+      cybozu.data['MOBILE_VIEW_SELECTABLE_BY_USER'] = true;
+      cybozu.data['DATE_FORMAT_FOR_FORMS'] = 'yyyy-MM-dd';
+      cybozu.data['SMART_DATETIME_FORMAT'] = {
+        AM_PM_FULL_FORMAT: "yyyy/M/d',' K:mm a",
+        TWENTY_FOUR_DATE_FORMAT: 'M/d H:mm',
+        DATE_FORMAT: 'M/d H:mm',
+        AM_PM_DATE_FORMAT: "M/d',' K:mm a",
+        TWENTY_FOUR_FULL_FORMAT: 'yyyy/M/d H:mm',
+        TIME_FORMAT: 'H:mm',
+        AM_PM_TIME_FORMAT: 'K:mm a',
+        TWENTY_FOUR_TIME_FORMAT: 'H:mm',
+        FULL_FORMAT: 'yyyy/M/d H:mm',
+      };
+      cybozu.data['DATE_FORMAT_IN_UK_ENABLED'] = false;
+      cybozu.data['DATETIME_FORMAT'] = {
+        TWENTY_FOUR: 'yyyy-MM-dd H:mm',
+        AM_PM: 'yyyy-MM-dd K:mm a',
+      };
+      cybozu.data['DATE_FORMAT'] = 'yyyy-MM-dd';
+      cybozu.data['JS_API_USER_LANGUAGE'] = 'ja';
+      cybozu.data['RECORD_GET_PERMISSIONS_JSAPI_ENABLED'] = false;
+      cybozu.data['APP_GET_PERMISSIONS_JSAPI_ENABLED'] = false;
+      // mobile
+      cybozu.data['MOBILE_PAGE'] = true;
+      cybozu.data.page['OAUTH_TOKEN_AVAILABLE'] = { availables: {} }.availables;
+    </script>
+    <script>
+      cybozu.data.page['APP_DATA'] = {
+        code: null,
+        createdAt: '2024-10-15T05:49:25.000Z',
+        creator: {
+          birthDate: null,
+          callto: null,
+          code: 'ai.kojima@fab.pasona.tech',
+          ctime: '2024-10-15T02:32:56.000Z',
+          dateTimeLocale: null,
+          description: null,
+          email: 'ai.kojima@fab.pasona.tech',
+          employeeNumber: null,
+          employeeType: null,
+          entityType: 'USER',
+          extendedData: null,
+          extensionNumber: null,
+          formattedDescription: null,
+          givenName: null,
+          givenNameReading: null,
+          id: '1',
+          initials: null,
+          isBuiltIn: false,
+          joinDate: null,
+          langLocale: null,
+          localName: null,
+          localNameLocale: null,
+          locale: null,
+          middleName: null,
+          mobilePhone: null,
+          mtime: '2024-10-15T02:32:56.000Z',
+          name: '児島愛',
+          numberLocale: null,
+          office: null,
+          phone: null,
+          photo: {
+            small:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_16.svg',
+            size_56:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_56.svg',
+            normal:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_36.svg',
+            size_32:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_32.svg',
+            original:
+              'https://static.cybozu.com/contents/k/image/icon/user/user.svg',
+            original_r:
+              'https://static.cybozu.com/contents/k/image/icon/user/user.svg',
+            size_40:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_40.svg',
+            size_48_r:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_48.svg',
+            size_48:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_48.svg',
+            size_96_r:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_96.svg',
+            size_24:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_24.svg',
+          },
+          photoMd5: null,
+          photoMime: null,
+          primaryOrganization: null,
+          removed: false,
+          serviceFlags: null,
+          sortOrder: null,
+          surName: null,
+          surNameReading: null,
+          timezone: 'Asia/Tokyo',
+          url: null,
+          valid: true,
+        },
+        decimalPrecision: 16,
+        decimalScale: 4,
+        deployed: true,
+        description: '',
+        fiscalYearStartMonth: 4,
+        formattedDescription: '',
+        guest: false,
+        htmlDescription: '',
+        icons: {
+          SMALL:
+            '/k/api/app/icon.do/-/app.png?app=7&size=SMALL&hash=46693f23c74d744d224562e8c5c4323a862ff98d&.png',
+          ORIGINAL:
+            '/k/api/app/icon.do/-/app.png?app=7&size=ORIGINAL&hash=46693f23c74d744d224562e8c5c4323a862ff98d&.png',
+          FAVICON:
+            '/k/api/app/icon.do/-/app.png?app=7&size=FAVICON&hash=46693f23c74d744d224562e8c5c4323a862ff98d&.png',
+          NORMAL:
+            '/k/api/app/icon.do/-/app.png?app=7&size=NORMAL&hash=46693f23c74d744d224562e8c5c4323a862ff98d&.png',
+        },
+        id: '7',
+        modified: false,
+        modifiedAt: '2024-10-16T05:21:30.000Z',
+        modifier: {
+          birthDate: null,
+          callto: null,
+          code: 'ai.kojima@fab.pasona.tech',
+          ctime: '2024-10-15T02:32:56.000Z',
+          dateTimeLocale: null,
+          description: null,
+          email: 'ai.kojima@fab.pasona.tech',
+          employeeNumber: null,
+          employeeType: null,
+          entityType: 'USER',
+          extendedData: null,
+          extensionNumber: null,
+          formattedDescription: null,
+          givenName: null,
+          givenNameReading: null,
+          id: '1',
+          initials: null,
+          isBuiltIn: false,
+          joinDate: null,
+          langLocale: null,
+          localName: null,
+          localNameLocale: null,
+          locale: null,
+          middleName: null,
+          mobilePhone: null,
+          mtime: '2024-10-15T02:32:56.000Z',
+          name: '児島愛',
+          numberLocale: null,
+          office: null,
+          phone: null,
+          photo: {
+            small:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_16.svg',
+            size_56:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_56.svg',
+            normal:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_36.svg',
+            size_32:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_32.svg',
+            original:
+              'https://static.cybozu.com/contents/k/image/icon/user/user.svg',
+            original_r:
+              'https://static.cybozu.com/contents/k/image/icon/user/user.svg',
+            size_40:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_40.svg',
+            size_48_r:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_48.svg',
+            size_48:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_48.svg',
+            size_96_r:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_96.svg',
+            size_24:
+              'https://static.cybozu.com/contents/k/image/icon/user/user_24.svg',
+          },
+          photoMd5: null,
+          photoMime: null,
+          primaryOrganization: null,
+          removed: false,
+          serviceFlags: null,
+          sortOrder: null,
+          surName: null,
+          surNameReading: null,
+          timezone: 'Asia/Tokyo',
+          url: null,
+          valid: true,
+        },
+        name: '勤怠管理',
+        revision: '8',
+        roundingMode: 'HALF_EVEN',
+        settings: {
+          appFacadeId: '11110006',
+          automaticallyChooseTitleComponent: true,
+          automaticallyChooseTitleComponentId: '6126831',
+          enableBulkDeletion: false,
+          enableRecordReuse: true,
+          jsScope: 'ALL',
+          reminderTimezone: null,
+          settingsNotesWillBeInherited: false,
+          theme: 'PLAIN',
+          titleComponentLocalId: null,
+          useCategory: false,
+          useComment: true,
+          useCommentNotification: true,
+          useHistory: true,
+          useInlineEditAndDelete: true,
+          useReminder: false,
+          useStatus: false,
+          useThumbnail: true,
+          vtRowRevisionId: '0',
+        },
+        spaceId: null,
+      };
+      cybozu.data.page['APP_PLUGIN_CONFIGS'] = {};
+      cybozu.data.page.CATEGORY_DATA = { categories: [], useCategory: 'false' };
+      cybozu.data.page['FORM_DATA'] = {
+        deployedFields: [
+          '6126836',
+          '11109123',
+          '6126833',
+          '6126832',
+          '6126834',
+          '6126829',
+          '6126828',
+          '6126831',
+          '6126825',
+          '6126824',
+          '6126827',
+          '6126826',
+          '6126823',
+          '6126822',
+        ],
+        layout:
+          '[{"id":null,"type":"ROW","isSubTable":false,"var":null,"label":null,"controlList":[{"isVirtical":true,"styleMap":{"width":246},"type":"SINGLE_LINE_TEXT","var":"社員番号","label":"社員番号"},{"isVirtical":true,"styleMap":{"width":251},"type":"SINGLE_LINE_TEXT","var":"氏名","label":"氏名"}]},{"id":null,"type":"ROW","isSubTable":false,"var":null,"label":null,"controlList":[{"isVirtical":true,"styleMap":{"width":246},"type":"DATETIME","var":"出勤時刻","label":"出勤時刻"},{"isVirtical":true,"styleMap":{"width":251},"type":"DATETIME","var":"退勤時刻","label":"退勤時刻"}]},{"id":null,"type":"ROW","isSubTable":false,"var":null,"label":null,"controlList":[{"isVirtical":true,"styleMap":{"width":240},"type":"CALC","var":"休憩時間","label":"休憩時間"},{"isVirtical":true,"styleMap":{"width":257},"type":"CALC","var":"勤務時間","label":"勤務時間"}]}]',
+        lookups: [
+          {
+            fieldMappings: [{ fieldId: '6126831', targetFieldId: '6126847' }],
+            id: '2014',
+            keyMapping: { fieldId: '11109123', targetFieldId: '6126846' },
+            keyTargetFieldAccessible: true,
+            listFields: [],
+            query: {
+              condition: null,
+              limit: null,
+              offset: null,
+              orders: [{ name: 'f6126838', op: 'DESC' }],
+            },
+            targetApp: {
+              accessible: true,
+              icon: '/k/api/app/icon.do/-/app.png?app=8&size=SMALL&hash=44a2d9e164d8ff0b7182a81bb8e5520ec7d20b5a&.png',
+              id: '8',
+              name: 'アルバイト一覧',
+              schema: {
+                groups: [],
+                revision: '3',
+                subTable: {},
+                table: {
+                  fieldList: {
+                    6126838: {
+                      id: '6126838',
+                      label: 'レコード番号',
+                      properties: { noLabel: 'false', required: 'true' },
+                      type: 'RECORD_ID',
+                      var: 'レコード番号',
+                    },
+                    6126839: {
+                      id: '6126839',
+                      label: '更新者',
+                      properties: { noLabel: 'false', required: 'true' },
+                      type: 'MODIFIER',
+                      var: '更新者',
+                    },
+                    6126840: {
+                      id: '6126840',
+                      label: '作成者',
+                      properties: { noLabel: 'false', required: 'true' },
+                      type: 'CREATOR',
+                      var: '作成者',
+                    },
+                    6126841: {
+                      id: '6126841',
+                      label: '更新日時',
+                      properties: { noLabel: 'false', required: 'true' },
+                      type: 'MODIFIED_AT',
+                      var: '更新日時',
+                    },
+                    6126842: {
+                      id: '6126842',
+                      label: '作成日時',
+                      properties: { noLabel: 'false', required: 'true' },
+                      type: 'CREATED_AT',
+                      var: '作成日時',
+                    },
+                    6126843: {
+                      id: '6126843',
+                      label: 'ステータス',
+                      properties: { noLabel: 'false', required: 'false' },
+                      type: 'STATUS',
+                      var: 'ステータス',
+                    },
+                    6126844: {
+                      id: '6126844',
+                      label: '作業者',
+                      properties: { noLabel: 'false', required: 'false' },
+                      type: 'STATUS_ASSIGNEE',
+                      var: '作業者',
+                    },
+                    6126845: {
+                      id: '6126845',
+                      label: 'カテゴリー',
+                      properties: { noLabel: 'false', required: 'false' },
+                      type: 'CATEGORY',
+                      var: 'カテゴリー',
+                    },
+                    6126846: {
+                      id: '6126846',
+                      label: '社員番号',
+                      properties: {
+                        defaultValue: '',
+                        expression: '',
+                        hideExpression: 'false',
+                        max: '64',
+                        min: null,
+                        noLabel: 'false',
+                        required: 'false',
+                        unique: 'true',
+                      },
+                      type: 'SINGLE_LINE_TEXT',
+                      var: '社員番号',
+                    },
+                    6126847: {
+                      id: '6126847',
+                      label: '氏名',
+                      properties: {
+                        defaultValue: '',
+                        expression: '',
+                        hideExpression: 'false',
+                        max: null,
+                        min: null,
+                        noLabel: 'false',
+                        required: 'false',
+                        unique: 'false',
+                      },
+                      type: 'SINGLE_LINE_TEXT',
+                      var: '氏名',
+                    },
+                  },
+                  id: '1',
+                  label: '__ROOT__',
+                  properties: null,
+                  var: '__ROOT__',
+                },
+              },
+              spaceId: null,
+              status: null,
+              useCategory: false,
+            },
+            unAccessibleFieldIds: [],
+          },
+        ],
+        referenceTables: [],
+        revision: '4',
+        schema: {
+          groups: [],
+          revision: '5',
+          subTable: {},
+          table: {
+            fieldList: {
+              6126822: {
+                id: '6126822',
+                label: 'レコード番号',
+                properties: { noLabel: 'false', required: 'true' },
+                type: 'RECORD_ID',
+                var: 'レコード番号',
+              },
+              6126823: {
+                id: '6126823',
+                label: '更新者',
+                properties: { noLabel: 'false', required: 'true' },
+                type: 'MODIFIER',
+                var: '更新者',
+              },
+              6126824: {
+                id: '6126824',
+                label: '作成者',
+                properties: { noLabel: 'false', required: 'true' },
+                type: 'CREATOR',
+                var: '作成者',
+              },
+              6126825: {
+                id: '6126825',
+                label: '更新日時',
+                properties: { noLabel: 'false', required: 'true' },
+                type: 'MODIFIED_AT',
+                var: '更新日時',
+              },
+              6126826: {
+                id: '6126826',
+                label: '作成日時',
+                properties: { noLabel: 'false', required: 'true' },
+                type: 'CREATED_AT',
+                var: '作成日時',
+              },
+              6126827: {
+                id: '6126827',
+                label: 'ステータス',
+                properties: { noLabel: 'false', required: 'false' },
+                type: 'STATUS',
+                var: 'ステータス',
+              },
+              6126828: {
+                id: '6126828',
+                label: '作業者',
+                properties: { noLabel: 'false', required: 'false' },
+                type: 'STATUS_ASSIGNEE',
+                var: '作業者',
+              },
+              6126829: {
+                id: '6126829',
+                label: 'カテゴリー',
+                properties: { noLabel: 'false', required: 'false' },
+                type: 'CATEGORY',
+                var: 'カテゴリー',
+              },
+              6126831: {
+                id: '6126831',
+                label: '氏名',
+                properties: {
+                  defaultValue: '',
+                  expression: '',
+                  hideExpression: 'false',
+                  max: null,
+                  min: null,
+                  noLabel: 'false',
+                  required: 'false',
+                  unique: 'false',
+                },
+                type: 'SINGLE_LINE_TEXT',
+                var: '氏名',
+              },
+              6126832: {
+                id: '6126832',
+                label: '出勤時刻',
+                properties: {
+                  defaultExpression: 'NOW',
+                  defaultValue: null,
+                  noLabel: 'false',
+                  required: 'false',
+                  unique: 'false',
+                },
+                type: 'DATETIME',
+                var: '出勤時刻',
+              },
+              6126833: {
+                id: '6126833',
+                label: '退勤時刻',
+                properties: {
+                  defaultExpression: 'NOW',
+                  defaultValue: null,
+                  noLabel: 'false',
+                  required: 'false',
+                  unique: 'false',
+                },
+                type: 'DATETIME',
+                var: '退勤時刻',
+              },
+              6126834: {
+                id: '6126834',
+                label: '勤務時間',
+                properties: {
+                  displayScale: null,
+                  expression:
+                    'IF(退勤時刻="","",(退勤時刻 -出勤時刻) - 休憩時間)',
+                  format: 'HOUR_MINUTE',
+                  hideExpression: 'false',
+                  noLabel: 'false',
+                  required: 'false',
+                  roundingMode: null,
+                  scale: null,
+                  unit: '',
+                  unitPosition: 'BEFORE',
+                },
+                type: 'CALC',
+                var: '勤務時間',
+              },
+              6126836: {
+                id: '6126836',
+                label: '休憩時間',
+                properties: {
+                  displayScale: null,
+                  expression: 'IF(退勤時刻-出勤時刻\u003E=18000,3600,0)',
+                  format: 'HOUR_MINUTE',
+                  hideExpression: 'false',
+                  noLabel: 'false',
+                  required: 'false',
+                  roundingMode: null,
+                  scale: null,
+                  unit: '',
+                  unitPosition: 'BEFORE',
+                },
+                type: 'CALC',
+                var: '休憩時間',
+              },
+              11109123: {
+                id: '11109123',
+                label: '社員番号',
+                properties: {
+                  defaultValue: '',
+                  expression: '',
+                  hideExpression: 'false',
+                  max: null,
+                  min: null,
+                  noLabel: 'false',
+                  required: 'false',
+                  unique: 'false',
+                },
+                type: 'SINGLE_LINE_TEXT',
+                var: '社員番号',
+              },
+            },
+            id: '1',
+            label: '__ROOT__',
+            properties: null,
+            var: '__ROOT__',
+          },
+        },
+      };
+      cybozu.data.page['REPORTS'] = { reports: [] };
+      cybozu.data.page['IS_USER_FAVORITE'] = false;
+      cybozu.data.page['RIGHT_RECORD_ADDABLE'] = true;
+      cybozu.data.page['RIGHT_APP_EDITABLE'] = true;
+      cybozu.data.page['FIELD_ACCESS_CONTROL'] = {
+        right: {
+          appId: '7',
+          fields: {
+            6126828: 'READ',
+            6126831: 'WRITE',
+            6126825: 'READ',
+            6126824: 'READ',
+            6126826: 'READ',
+            6126836: 'WRITE',
+            6126823: 'READ',
+            11109123: 'WRITE',
+            6126822: 'READ',
+            6126833: 'WRITE',
+            6126832: 'WRITE',
+            6126834: 'WRITE',
+          },
+        },
+      };
+      cybozu.data.page['VIEWS'] = {
+        views: [
+          {
+            builtinType: null,
+            device: null,
+            id: '11109115',
+            name: '今日の出退勤一覧',
+            type: 'LIST',
+          },
+          {
+            builtinType: 'ALL',
+            device: null,
+            id: '20',
+            name: '（すべて）',
+            type: 'LIST',
+          },
+        ],
+      };
+      cybozu.data.page['CUSTOMIZE_EXECUTABLE'] = true;
+      cybozu.data.page['VIEW_ID'] = '11109115';
+      cybozu.data.page['VIEW_DATA'] = {
+        advancedMode: false,
+        appId: '7',
+        builtinType: null,
+        device: null,
+        fields: [
+          {
+            row: [
+              { columnWidth: null, id: '11109123' },
+              { columnWidth: null, id: '6126831' },
+              { columnWidth: null, id: '6126832' },
+              { columnWidth: null, id: '6126833' },
+              { columnWidth: null, id: '6126836' },
+              { columnWidth: null, id: '6126834' },
+            ],
+          },
+        ],
+        html: null,
+        keyFieldId: null,
+        name: '今日の出退勤一覧',
+        pager: null,
+        query: {
+          condition: {
+            key: 'f6126832',
+            nest: 0,
+            op: 'EQ',
+            type: 'COMPARISON',
+            value: { args: [], type: 'FUNCTION', value: 'TODAY' },
+          },
+          limit: null,
+          offset: null,
+          orders: [{ name: 'f6126822', op: 'DESC' }],
+        },
+        revision: '1',
+        titleFieldId: null,
+        viewId: '11109115',
+        viewType: 'LIST',
+      };
+      cybozu.data.page['V1_QUERY_CONDITION'] = {
+        errorMessage: '',
+        query: '出勤時刻 = TODAY()',
+      };
+      cybozu.data.page['QUERY_STRING'] = 'f6126832 = TODAY()';
+      cybozu.data.page['STATUS_DATA'] = {
+        actions: [],
+        filters: [],
+        initialStateId: null,
+        states: [],
+        useStatus: 'false',
+      };
+      cybozu.data.page['QUERY'] = {
+        condition: {
+          key: 'f6126832',
+          nest: 0,
+          op: 'EQ',
+          type: 'COMPARISON',
+          value: { args: [], type: 'FUNCTION', value: 'TODAY' },
+        },
+      };
+    </script>
+
+    <script src="https://why37oecg0cf.cybozu.com/k/api/js/download.do?app=7&amp;jsType=MOBILE&amp;contentId=111&amp;hash=ce15ea8356b2515ad5142db380bdf38ea85af1a1"></script>
+    <script src="https://why37oecg0cf.cybozu.com/k/api/js/download.do?app=7&amp;jsType=MOBILE&amp;contentId=113&amp;hash=0fb53c9be96763e17aa76b808bc577e3933282bc"></script>
+
+    <script>
+      cybozu.eventTarget.dispatchEvent({ type: 'load' });
+    </script>
+    <div id="pageloaded-cybozu"></div>
+    <div
+      role="dialog"
+      aria-modal="true"
+      class="gaia-mobile-v2-bottomsheet gaia-mobile-v2-navigationpanel-appfilterbottomsheet gaia-mobile-v2-bottomsheet-hidden"
+      aria-hidden="true"
+    >
+      <div class="gaia-mobile-v2-bottomsheet-background"></div>
+      <div class="gaia-mobile-v2-bottomsheet-contents">
+        <div>
+          <h2 class="gaia-mobile-v2-bottomsheet-title">アプリの一覧を選択</h2>
+          <ul role="menu" class="gaia-mobile-v2-bottomsheet-menu">
+            <li
+              class="gaia-mobile-v2-bottomsheet-menuitem gaia-mobile-v2-navigationpanel-appfilterbottomsheet-allapps gaia-mobile-v2-navigationpanel-appfilterbottomsheet-selected"
+            >
+              <button
+                role="menuitem"
+                type="button"
+                class="gaia-mobile-v2-navigationpanel-appfilterbottomsheet-allapps-button"
+              >
+                すべてのアプリ
+              </button>
+            </li>
+            <li
+              class="gaia-mobile-v2-bottomsheet-menuitem gaia-mobile-v2-navigationpanel-appfilterbottomsheet-recentlyusedapps"
+            >
+              <button
+                role="menuitem"
+                type="button"
+                class="gaia-mobile-v2-navigationpanel-appfilterbottomsheet-recentlyusedapps-button"
+              >
+                最近開いたアプリ
+              </button>
+            </li>
+          </ul>
+          <button type="button" class="gaia-mobile-v2-bottomsheet-cancel">
+            キャンセル
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      role="dialog"
+      aria-modal="true"
+      class="gaia-mobile-v2-bottomsheet gaia-mobile-v2-app-appbottomsheet gaia-mobile-v2-bottomsheet-hidden"
+      aria-hidden="true"
+    >
+      <div class="gaia-mobile-v2-bottomsheet-background"></div>
+      <div class="gaia-mobile-v2-bottomsheet-contents">
+        <div>
+          <h2 class="gaia-mobile-v2-bottomsheet-title">勤怠管理</h2>
+          <ul role="menu" class="gaia-mobile-v2-bottomsheet-menu">
+            <li class="gaia-mobile-v2-bottomsheet-menuitem">
+              <button
+                type="button"
+                role="menuitem"
+                class="gaia-mobile-v2-app-appbottomsheet-item-add-favorite"
+              >
+                お気に入りに追加</button
+              ><button
+                type="button"
+                role="menuitem"
+                class="gaia-mobile-v2-app-appbottomsheet-item-remove-favorite gaia-mobile-v2-app-appbottomsheet-item-hidden"
+              >
+                お気に入りを解除
+              </button>
+            </li>
+            <li class="gaia-mobile-v2-bottomsheet-menuitem">
+              <button
+                type="button"
+                role="menuitem"
+                class="gaia-mobile-v2-app-appbottomsheet-item-show-app-description-button"
+                disabled=""
+              >
+                このアプリの説明を表示（説明がありません）
+              </button>
+            </li>
+            <li class="gaia-mobile-v2-bottomsheet-menuitem">
+              <a
+                href="/k/m/7/"
+                class="gaia-mobile-v2-app-appbottomsheet-item-link-openapp"
+                role="menuitem"
+                >このアプリのトップを開く</a
+              >
+            </li>
+          </ul>
+          <button type="button" class="gaia-mobile-v2-bottomsheet-cancel">
+            キャンセル
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      role="dialog"
+      aria-modal="true"
+      class="gaia-mobile-v2-bottomsheet gaia-mobile-v2-app-index-navigationbar-viewselectbottomsheet gaia-mobile-v2-bottomsheet-hidden"
+      aria-hidden="true"
+    >
+      <div class="gaia-mobile-v2-bottomsheet-background"></div>
+      <div class="gaia-mobile-v2-bottomsheet-contents">
+        <div>
+          <h2 class="gaia-mobile-v2-bottomsheet-title">一覧を切り替える</h2>
+          <ul role="menu" class="gaia-mobile-v2-bottomsheet-menu">
+            <li class="gaia-mobile-v2-bottomsheet-menuitem menuitem-selected">
+              <button class="menuitem-button" role="menuitem" type="button">
+                今日の出退勤一覧
+              </button>
+            </li>
+            <li class="gaia-mobile-v2-bottomsheet-menuitem">
+              <button class="menuitem-button" role="menuitem" type="button">
+                （すべて）
+              </button>
+            </li>
+          </ul>
+          <button type="button" class="gaia-mobile-v2-bottomsheet-cancel">
+            キャンセル
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="chrome-extension://hgeiddmainfjlchncbkodkmgjhdnnggb/index.bundle.js"></script>
+  </body>
+</html>
