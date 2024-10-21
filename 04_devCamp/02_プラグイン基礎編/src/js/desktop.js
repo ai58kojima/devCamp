@@ -1,6 +1,7 @@
-(async () => {
+((PLUGIN_ID) => {
   'use strict';
-  const HOLIDAY_MANAGEMENT_APP_ID = kintone.app.getId() + 1;
+  const config = kintone.plugin.app.getConfig(PLUGIN_ID);
+  const HOLIDAY_MANAGEMENT_APP_ID = config.appId;
 
   kintone.events.on('app.record.detail.process.proceed', async (event) => {
     try {
@@ -40,4 +41,4 @@
       return false;
     }
   });
-})();
+})(kintone.$PLUGIN_ID);

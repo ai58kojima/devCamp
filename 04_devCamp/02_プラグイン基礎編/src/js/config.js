@@ -5,7 +5,7 @@
   document.getElementById('submit').addEventListener('click', () => {
     //プラグインの設定情報(アプリID)を保存する -https://cybozu.dev/ja/id/db07deb5730bc862595b708b/#set-config
     kintone.plugin.app.setConfig({
-      appID: document.getElementById('appId').value,
+      appId: document.getElementById('appId').value,
     });
   });
 
@@ -23,4 +23,3 @@
   }
   document.getElementById('appId').value = config.appID || '';
 })(kintone.$PLUGIN_ID);
-// ～ｐ２９
