@@ -12,11 +12,15 @@
   },
   "icon": "image/icon.png",
   "desktop": {
-    "js": ["js/desktop.js"]
+    "js": [
+      "https://127.0.0.1:5500/04_devCamp/02_プラグイン基礎編/src/js/desktop.js"
+    ]
   },
   "config": {
     "html": "html/config.html",
-    "js": ["js/config.js"],
+    "js": [
+      "https://127.0.0.1:5500/04_devCamp/02_プラグイン基礎編/src/js/config.js"
+    ],
     "css": ["css/51-modern-default.css"]
   }
 }
