@@ -1,4 +1,4 @@
-((PLUGIN_ID) => {
+(async (PLUGIN_ID) => {
   'use strict';
   const config = kintone.plugin.app.getConfig(PLUGIN_ID);
   const HOLIDAY_MANAGEMENT_APP_ID = config.appId;
@@ -32,6 +32,20 @@
             },
           },
         });
+
+        //秘匿情報を利⽤する API kintone.plugin.app.proxy(pluginId, url, method, headers, data, successCallback, failureCallback)
+        await kintone.plugin.app.proxy(
+          PLUGIN_ID,
+          kintone.api.url('/k/v1/record.json'),
+          'PUT',
+          { 'Content-Type': 'application/json' },
+          {
+            app: HOLIDAY_MANAGEMENT_APP_ID,
+            updateKey: {},
+            record: {},
+          }
+        );
+
         alert('有給休暇マスタの更新が完了しました');
       }
       return event;

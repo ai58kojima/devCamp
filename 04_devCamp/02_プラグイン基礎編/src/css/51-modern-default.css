@@ -61,6 +61,10 @@
   margin-bottom: 8px;
   font-weight: bold;
 }
+h2.kintoneplugin-label {
+  font-size: 24px;
+  color: #0085de;
+}
 
 /* Title for each settings */
 /* Title */
