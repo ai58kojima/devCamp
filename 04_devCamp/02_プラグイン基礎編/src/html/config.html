@@ -1,10 +1,21 @@
-<h2>有給休暇申請プラグイン設定画面</h2>
-<p>有給休暇マスタアプリのアプリIDを入力してください。</p>
-<input type="text" id="appId" />
-<p>有給休暇マスタアプリのAPIトークンを入力してください。</p>
-<input type="password" id="token" />
-<div>
-  <button type="button" id="submit">保存する</button>
-  <button type="button" id="cancel">キャンセル</button>
+<h2 class="kintoneplugin-label">有給休暇申請プラグイン設定画面</h2>
+<p class="kintoneplugin-row">
+  有給休暇マスタアプリのアプリIDを入力してください。
+</p>
+<div class="kintoneplugin-input-outer">
+  <input class="kintoneplugin-input-text" type="text" id="appId" />
 </div>
-<!-- HTML の⼤枠は kintone が準備しているため body タグの内側だけで良い -->
+<p class="kintoneplugin-row">
+  有給休暇マスタアプリのAPIトークンを入力してください。
+</p>
+<div class="kintoneplugin-input-outer kintoneplugin-row">
+  <input class="kintoneplugin-input-text" type="password" id="token" />
+</div>
+<div>
+  <button class="kintoneplugin-button-dialog-ok" type="button" id="submit">
+    保存する
+  </button>
+  <button class="kintoneplugin-button-dialog-cancel" type="button" id="cancel">
+    キャンセル
+  </button>
+</div>

@@ -3,24 +3,20 @@
   "version": "0.1",
   "type": "APP",
   "name": {
-    "ja": "サンプルプラグイン",
+    "ja": "有給休暇申請プラグイン",
     "en": "sample plugin"
   },
   "description": {
-    "ja": "devCampのサンプルプラグインです。",
+    "ja": "有給休暇申請プラグインです。",
     "en": "This is sample plugin for devCamp."
   },
   "icon": "image/icon.png",
   "desktop": {
-    "js": [
-      "https://127.0.0.1:5500/04_devCamp/02_プラグイン基礎編/src/js/desktop.js"
-    ]
+    "js": ["js/desktop.js"]
   },
   "config": {
     "html": "html/config.html",
-    "js": [
-      "https://127.0.0.1:5500/04_devCamp/02_プラグイン基礎編/src/js/config.js"
-    ],
+    "js": ["js/config.js"],
     "css": ["css/51-modern-default.css"]
   }
 }

@@ -1,7 +1,6 @@
-((PLUGIN_ID) => {
+(async () => {
   'use strict';
-  const config = kintone.plugin.app.getConfig(PLUGIN_ID);
-  const HOLIDAY_MANAGEMENT_APP_ID = config.appId;
+  const HOLIDAY_MANAGEMENT_APP_ID = kintone.app.getId() + 1;
 
   kintone.events.on('app.record.detail.process.proceed', async (event) => {
     try {
@@ -17,20 +16,24 @@
           query: `社員番号 = "${event.record.社員番号.value}"`,
           fields: ['取得済日数', '残日数'],
         });
-        await kintone.api('/k/v1/record.json', 'PUT', {
+        await kintone.api('/k/v1/records.json', 'PUT', {
           app: HOLIDAY_MANAGEMENT_APP_ID,
-          updateKey: {
-            field: '社員番号',
-            value: event.record.社員番号.value,
-          },
-          record: {
-            取得済日数: {
-              value: Number(resp.records[0].取得済日数.value) + leaveCount,
+          records: [
+            {
+              updateKey: {
+                field: '社員番号',
+                value: event.record.社員番号.value,
+              },
+              record: {
+                取得済日数: {
+                  value: Number(resp.records[0].取得済日数.value) + leaveCount,
+                },
+                残日数: {
+                  value: Number(resp.records[0].残日数.value) - leaveCount,
+                },
+              },
             },
-            残日数: {
-              value: Number(resp.records[0].残日数.value) - leaveCount,
-            },
-          },
+          ],
         });
         alert('有給休暇マスタの更新が完了しました');
       }
@@ -41,4 +44,4 @@
       return false;
     }
   });
-})(kintone.$PLUGIN_ID);
+})();
